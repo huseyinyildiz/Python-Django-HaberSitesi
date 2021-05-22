@@ -4,11 +4,15 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.models import Settings, ContactFormu, ContactFormMessage
+from news.models import New
 
 
 def index(request):
     setting=Settings.objects.get(pk=1)
-    context={'setting':setting,'page':'home'}
+    sliderdata =New.objects.all()[:4]
+    context={'setting':setting,
+             'page':'home',
+             'sliderdata':sliderdata}
 
     return render(request,'index.html',context)
 
