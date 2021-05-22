@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Category(models.Model):
@@ -36,7 +37,7 @@ class New(models.Model):
     title = models.CharField(max_length=200)
     keywords = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
-    detail = models.TextField()
+    detail = RichTextUploadingField()
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField()
