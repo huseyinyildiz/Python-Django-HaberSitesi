@@ -87,13 +87,12 @@
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="/" class="active">Anasayfa</a></li>
+                                {% load mptt_tags %}
 								<li class="dropdown"><a href="#">Kategoriler<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="cart.html">Cart</a></li>
-										<li><a href="login.html">Login</a></li>
+                                        {% recursetree category %}
+                                        <li><a href="/category/{{ node.slug }}">{{ node.title }}</a></li>
+                                        {% endrecursetree %}
                                     </ul>
                                 </li>
 								<li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
