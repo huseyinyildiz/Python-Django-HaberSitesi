@@ -1,0 +1,31 @@
+{% extends 'homebase.html'%}
+{% block title %}{{ categorydata.title}} Haberler{% endblock %}
+{% block keywords %}{{ categorydata.keywords }}{% endblock %}
+{% block description %}{{ categorydata.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 padding-right">
+                {% for rs in news %}
+                    <div class="col-sm-4">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img src="{{ rs.image.url }}" alt="" />
+                                    <h2> {{ rs.title }}</h2>
+                                    <p>{{ rs.description }}</p>
+                                    <a href="/new/{{ rs.id }}/{{ rs.slug }}" class="btn btn-default add-to-cart"><i class="fa fa-smile-o"></i>Habere git</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

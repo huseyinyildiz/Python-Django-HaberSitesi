@@ -50,3 +50,13 @@ def contactus(request):
     context={'setting':setting,'form':form}
 
     return render(request,'contactus.html',context)
+
+def category_news(request,id,slug):
+    category=Category.objects.all()
+    categorydata=Category.objects.get(pk=id)
+    news=New.objects.filter(category_id=id)
+    context={'news':news,
+             'category':category,
+             'categorydata':categorydata
+             }
+    return render(request,'news.html',context)
