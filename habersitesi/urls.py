@@ -30,6 +30,7 @@ urlpatterns = [
     path('news/',include('news.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('category/<int:id>/<slug:slug>/',views.category_news,name='category_news'),
+    path('new/<int:id>/<slug:slug>/',views.new_detail,name='new_detail')
 ]
 if settings.DEBUG: #new
    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #resimleri görebilmek için ekledik adminde

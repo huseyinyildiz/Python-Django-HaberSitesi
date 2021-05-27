@@ -1,10 +1,10 @@
 from django.contrib import messages
-from django.http import  HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 from home.models import Settings, ContactFormu, ContactFormMessage
-from news.models import New, Category
+from news.models import New, Category, Images
 
 
 def index(request):
@@ -64,3 +64,13 @@ def category_news(request,id,slug):
              'categorydata':categorydata
              }
     return render(request,'news.html',context)
+
+def new_detail(request,id,slug):
+    category=Category.objects.all()
+    new = New.objects.get(pk=id)
+    images=Images.objects.filter(news_id=id)
+    context={'category':category,
+             'new':new,
+             'images':images}
+    return render(request,'new_detail.html',context)
+
