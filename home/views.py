@@ -9,12 +9,16 @@ from news.models import New, Category
 
 def index(request):
     setting=Settings.objects.get(pk=1)
-    sliderdata =New.objects.all()[:4]
+    sliderdata =New.objects.all().order_by('?')[:4]
     category=Category.objects.all()
+    daily=New.objects.all().order_by('?')[:6]
+    recommend=New.objects.all().order_by('?')[:3]
     context={'setting':setting,
              'category':category,
              'page':'home',
-             'sliderdata':sliderdata}
+             'sliderdata':sliderdata,
+             'daily':daily,
+             'recommend':recommend}
 
     return render(request,'index.html',context)
 
