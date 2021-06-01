@@ -1,0 +1,31 @@
+{% extends 'homebase.html'%}
+{% block title %}Haber Arama Sayfası{% endblock %}
+{% block keywords %}{{ category.keywords }}{% endblock %}
+{% block description %}{{ categorydata.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+            <div class="row">
+                <div class="col-sm-12 padding-right">
+                    <table cellpadding="3" width="1200">
+                        <tr>
+                            <th>Fotoğraf</th>
+                            <th>Haber Adı</th>
+                            <th>Kategori</th>
+                        </tr>
+                        {% for rs in new %}
+                            <tr>
+                            <td><a href="/new/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}" style="height: 80px" alt=""></a></td>
+                            <td><h4 class="product-name"><a href="/new/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a></h4></td>
+                            <td><a href="/category/{{ rs.category.id }}/{{ rs.category.slug }}">{{ rs.category }}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+{% endblock %}
