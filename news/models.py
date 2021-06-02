@@ -4,6 +4,7 @@ from django.db import models
 
 # Create your models here.
 from django.forms import ModelForm
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.fields import RichTextUploadingField
 from mptt.fields import TreeForeignKey
@@ -21,7 +22,7 @@ class Category(MPTTModel):
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
 
-    slug = models.SlugField()
+    slug = models.SlugField(null=False,unique=True)
     parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -41,6 +42,9 @@ class Category(MPTTModel):
     image_tag.short_description='Image'
 
 
+def get_absolute_url(self):
+    return reverse('category_detail',kwargs={'slug':self.slug})
+
 class New(models.Model):
     STATUS = (
         ('True', 'Evet'),
@@ -52,7 +56,7 @@ class New(models.Model):
     detail = RichTextUploadingField()
     image = models.ImageField(blank=True, upload_to='images/')
     status = models.CharField(max_length=10, choices=STATUS)
-    slug = models.SlugField()
+    slug = models.SlugField(null=False,unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -62,6 +66,8 @@ class New(models.Model):
     def image_tag(self):
         return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
     image_tag.short_description='Image'
+def get_absolute_url(self):
+    return reverse('new_details',kwargs={'slug':self.slug})
 class Images(models.Model):
     news=models.ForeignKey(New,on_delete=models.CASCADE)
     title = models.CharField(max_length=50,blank=True)

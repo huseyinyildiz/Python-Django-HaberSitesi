@@ -6,7 +6,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.models import Settings, ContactFormu, ContactFormMessage
-from home.templates.form import SearchForm
+from home.forms import SearchForm
 from news.models import New, Category, Images, Comment
 
 
@@ -98,7 +98,7 @@ def new_search(request):
 def new_search_auto(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
-        new = New.objects.filter(city__icontains=q)
+        new = New.objects.filter(title__icontains=q)
         results = []
         for rs in new:
             new_json = {}
