@@ -33,6 +33,8 @@ urlpatterns = [
     path('new/<int:id>/<slug:slug>/',views.new_detail,name='new_detail'),
     path('search/',views.new_search, name='new_search'),
     path('search_auto/', views.new_search_auto , name='new_search_auto'),
+    path('logout/',views.logout_view,name='logout_view'),
+    path('login/',views.login_view,name='login_view'),
 ]
 if settings.DEBUG: #new
    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #resimleri görebilmek için ekledik adminde

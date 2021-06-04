@@ -1,0 +1,35 @@
+{% extends 'homebase.html'%}
+{% block title %}Giriş Yap{{ setting.company }}{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+            <div class="row">
+                 <div class="col-md-12 padding-right">
+                    <div class="contact-form">
+	    				<h3 class="title text-center">Kullanıcı Girişi</h3>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input name="username" type="text" placeholder="Kullanıcı Adınızı Girin." />
+							<input name="password" type="password" placeholder="Şifrenizi girin." />
+                            <input type="submit" value="Giriş Yap">
+                        </form>
+
+	    			</div>
+                </div>
+            </div>
+        </div>
+{% endblock %}
