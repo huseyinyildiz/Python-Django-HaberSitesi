@@ -1,10 +1,6 @@
 {% extends 'homebase.html' %}
 {% block title %}{{ profile.user.first_name }} Profili{% endblock %}
-{% block keywords %}{{ setting.keywords }}{% endblock %}
-{% block description %}{{ setting.description }}{% endblock %}
-{% block head %}
-    <link rel="shortcut icon" href="{{ setting.icon.url }}">
-{% endblock %}
+
 
 
 {% block content %}
@@ -16,7 +12,10 @@
             <div class="col-sm-10 padding-right">
                 <table class="table">
                     <tr>
-                        <th class="text-center"></th>
+                        <th class="text-center">
+                            <a href="/user/update" class="btn-primary">Profili Güncelle</a>
+                            <a href="/user/password" class="btn-primary">Şifreni Değiştir</a>
+                        </th>
                         <td class="thumbnail"><img src="{{ profile.image.url }}" style="height: 150px" alt=""></td>
                     </tr>
                     <tr>
