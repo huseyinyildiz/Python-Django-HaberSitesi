@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.models import Settings, ContactFormu, ContactFormMessage
-from home.forms import SearchForm
+from home.forms import SearchForm, RegisterForm
 from news.models import New, Category, Images, Comment
 
 
@@ -130,3 +130,19 @@ def login_view(request):
     category=Category.objects.all()
     context={'category':category}
     return render(request,'login.html',context)
+
+def register_view(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username , password=password)
+            login(request,user)
+            return HttpResponseRedirect('/')
+    form = RegisterForm()
+    category = Category.objects.all()
+    context = {'category':category,
+               'form':form,}
+    return render(request,'register.html',context)
