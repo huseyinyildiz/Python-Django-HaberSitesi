@@ -1,0 +1,52 @@
+{% extends 'homebase.html' %}
+{% block title %}{{ profile.user.first_name }} Profili{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2 padding-right">
+                {% include "user_panel.html" %}
+            </div>
+            <div class="col-sm-10 padding-right">
+                <table class="table">
+                    <tr>
+                        <th class="text-center"></th>
+                        <td class="thumbnail"><img src="{{ profile.image.url }}" style="height: 150px" alt=""></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">İsim Soyisim</th>
+                        <td class="text-left">{{ profile.user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Email</th>
+                        <td class="text-left">{{ profile.user.email }}</td>
+
+                    </tr>
+                    <tr>
+                        <th class="text-left">Numara</th>
+                        <td class="text-left">{{ profile.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Adres</th>
+                        <td class="text-left">{{ profile.address }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Şehir</th>
+                        <td class="text-left">{{ profile.city }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Ülke</th>
+                        <td class="text-left">{{ profile.country }}</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
