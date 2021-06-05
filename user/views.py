@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from home.models import UserProfile
+from home.models import UserProfile , Settings
 from news.models import Category, Comment, New
 from user.forms import UserUpdateForm, ProfileUpdateForm
 from user.models import ContentForm

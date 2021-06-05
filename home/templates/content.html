@@ -2,36 +2,7 @@
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="left-sidebar">
-                    <h2>Category</h2>
-                    {% load mptt_tags %}
-                    {% recursetree category %}
-                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"></h4>
-                                    <a data-toggle="collapse" data-parent="#accordian" href="#{{ node.id }}" >
-                                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
-                                        {{ node.title }}
-                                    </a>
-                                </div>
-                                {% if not node.is_leaf_node %}
-                                    <div id="{{ node.id }}"  class="panel-collapse collapse">
-                                        <div class="panel-body">
-                                            <ul class="children">
-                                                <li><a href="buraya link girmeyi yap">{{ children }}</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </div><!--/panel-defaults-->
-                        </div><!--/category-products-->
-                    {% endrecursetree %}
-                </div><!--/sidebar--->
-            </div><!--/colsm3--->
-
-            <div class="col-sm-9 padding-right">
+            <div class="col-sm-12 padding-right">
                 <div class="features_items"><!--features_items-->
                     <h2 class="title text-center">Güncel Haberler</h2>
                     {% for rs in daily %}
