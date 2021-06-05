@@ -1,0 +1,47 @@
+{% extends 'homebase.html' %}
+{% block title %}{{ profile.user.first_name }} Yorumlar{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                {% include 'user_panel.html' %}
+            </div>
+            <div class="col-md-10">
+                <table id="example1" class="table table-bordered table-striped" >
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Haber</th>
+                        <th>Konu</th>
+                        <th>Yorum</th>
+                        <th>Status</th>
+                        <th>Rate</th>
+                        <th>Date</th>
+                        <th style="..." colspan="3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rs in comments %}
+                        <tr>
+                            <td>{{rs.id}}</td>
+                            <td><a href="/new/{{ rs.new.id }}/{{ rs.new.slug }}">{{ rs.new.title }}</a></td>
+                            <td>{{ rs.subject }}</td>
+                            <td>{{ rs.comment }}</td>
+                            <td>{{ rs.status }}</td>
+                            <td>{{ rs.rate }}</td>
+                            <td>{{ rs.create_at }}</td>
+                            <td><a  class="btn-primary" href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Sileceksiniz! Emin misiniz?')"><i class="fa fa-warning"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
