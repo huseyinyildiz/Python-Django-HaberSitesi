@@ -1,0 +1,48 @@
+{% extends 'homebase.html' %}
+{% block title %}{{ profile.user.first_name }} Haberler{% endblock %}
+{% block keywords %}{{ setting.keywords }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" href="{{ setting.icon.url }}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                {% include 'user_panel.html' %}
+            </div>
+            <div class="col-md-10">
+                <div class="title">
+                    <h4 class="title">Haber Listesi</h4>
+                    <a class="btn-primary" href="/user/addcontent">Haber Ekle</a>
+                </div>
+                <table id="example1" class="table table-bordered table-striped" >
+                    <thead>
+                    <tr>
+                        <th>Resim</th>
+                        <th>Başlık</th>
+                        <th>Kategori</th>
+                        <th>Status</th>
+                        <th>Tarih</th>
+                        <th style="..." colspan="3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rs in contents %}
+                        <tr>
+                            <td><img src="{{ rs.image.url }}" style="height: 30px;" alt=""></td>
+                            <td><a href="">{{ rs.title }}</a></td>
+                            <td>{{ rs.category.title }}</td>
+                            <td>{{ rs.status }}</td>
+                            <td>{{ rs.create_at }}</td>
+                            <td><a  class="btn-primary" href="/user/contentdelete/{{ rs.id }}" onclick="return confirm('Sileceksiniz! Emin misiniz?')"><i class="fa fa-warning"></i></a></td>
+                            <td><a  class="btn-primary" href="/user/contentedit/{{ rs.id }}" ><i class="fa fa-edit"></i></a></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
