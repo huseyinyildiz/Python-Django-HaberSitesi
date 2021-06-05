@@ -37,6 +37,7 @@ urlpatterns = [
     path('logout/',views.logout_view,name='logout_view'),
     path('login/',views.login_view,name='login_view'),
     path('register/',views.register_view,name='register_view'),
+    path('faq/', views.faq ,name='faq')
 ]
 if settings.DEBUG: #new
    urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #resimleri görebilmek için ekledik adminde

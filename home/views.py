@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from home.models import Settings, ContactFormu, ContactFormMessage, UserProfile
+from home.models import Settings, ContactFormu, ContactFormMessage, UserProfile, FAQ
 from home.forms import SearchForm, RegisterForm
 from news.models import New, Category, Images, Comment
 
@@ -151,3 +151,13 @@ def register_view(request):
     context = {'category':category,
                'form':form,}
     return render(request,'register.html',context)
+
+
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.all()
+    context = {
+        'category':category,
+        'faq':faq
+    }
+    return render(request,'faq.html',context)
