@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -10,7 +11,7 @@ from news.models import Category, Comment, New
 from user.forms import UserUpdateForm, ProfileUpdateForm
 from user.models import ContentForm
 
-
+@login_required(login_url='/login') # Check login
 def index(request):
     category = Category.objects.all()
     current_user = request.user
@@ -19,6 +20,7 @@ def index(request):
                'profile':profile}
     return render(request,'user_profile.html',context)
 
+@login_required(login_url='/login') # Check login
 def user_update(request):
     if request.method == 'POST':
         user_form = UserUpdateForm(request.POST, instance=request.user)
@@ -42,7 +44,7 @@ def user_update(request):
         return render(request, 'user_update.html', context)
 
 
-
+@login_required(login_url='/login') # Check login
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user , request.POST)
@@ -61,7 +63,7 @@ def change_password(request):
             'form':form ,'category':category
         })
 
-
+@login_required(login_url='/login') # Check login
 def comments(request):
     category = Category.objects.all()
     current_user = request.user
@@ -72,13 +74,14 @@ def comments(request):
     }
     return render(request,'user_comments.html',context)
 
-
+@login_required(login_url='/login') # Check login
 def deletecomment(request,id):
     current_user = request.user
     Comment.objects.filter(id = id,user_id=current_user.id).delete()
     messages.success(request,'Silindi.')
     return HttpResponseRedirect('/user/comments')
 
+@login_required(login_url='/login') # Check login
 def contents(request):
     category = Category.objects.all()
     current_user = request.user
@@ -90,6 +93,7 @@ def contents(request):
     }
     return render(request,'user_contents.html',context)
 
+@login_required(login_url='/login') # Check login
 def addcontent(request):
     if request.method=='POST':
         form=ContentForm(request.POST,request.FILES)
@@ -119,6 +123,8 @@ def addcontent(request):
             'form':form,
         }
         return render(request,'user_addcontent.html',context)
+
+@login_required(login_url='/login') # Check login
 def contentedit(request,id):
     content=New.objects.get(id=id)
     if request.method=='POST':
@@ -140,6 +146,7 @@ def contentedit(request,id):
         }
         return render(request,'user_addcontent.html',context)
 
+@login_required(login_url='/login') # Check login
 def contentdelete(request,id) :
     current_user=request.user
     New.objects.filter(id=id, user_id=current_user.id).delete()

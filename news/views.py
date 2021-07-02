@@ -9,6 +9,7 @@ from news.models import CommentForm,Comment
 
 def index(request):
     return HttpResponse("News Page ")
+
 @login_required(login_url='/login')
 def addcomment(request,id):
     url = request.META.get('HTTP_REFERER')
